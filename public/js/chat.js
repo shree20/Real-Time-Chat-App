@@ -36,17 +36,21 @@ socket.on('message', (message) => {
     const html = Mustache.render(messageTemplate, {
         username: message.username,
         message: message.text,
-        createdAt: moment(message.createdAt).format('h:mm a')
+        createdAt: moment(message.createdAt).format('h:mm a'),
+        alignright: username.trim().toLowerCase() === message.username ?'align-right' : ''
     })
     $messages.insertAdjacentHTML("beforeend", html)
     autoScroll()
+    
 })
 
 socket.on('locationMessage', (locationMessage) => {
     const html = Mustache.render(locationTemplate, {
         username: locationMessage.username,
         url: locationMessage.url,
-        createdAt: moment(locationMessage.createdAt).format('h:mm a')
+        createdAt: moment(locationMessage.createdAt).format('h:mm a'),
+        alignright: username.trim().toLowerCase() === locationMessage.username ?'align-right' : ''
+
     })
     $messages.insertAdjacentHTML('beforeend', html)
     // console.log(url)
